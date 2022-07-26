@@ -1,6 +1,5 @@
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinVersion = extra["kotlin.version"] as String
 val koinVersion = extra["koin.version"] as String
@@ -33,7 +32,7 @@ repositories {
 kotlin {
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.jvmTarget = JavaVersion.VERSION_11.majorVersion
         }
         withJava()
     }
@@ -77,9 +76,20 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "ComposeDesktopPlayground"
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Exe, TargetFormat.Deb)
+            packageName = "Compose Desktop Playground"
             packageVersion = "1.0.0"
+            description = "A collection of Experiments with Compose Desktop"
+            copyright = "© 2022 RackaApps. All rights reserved."
+            vendor = "RackaApps"
+
+            windows {
+                shortcut = true
+                menuGroup = packageName
+                // Wondering what the heck is this?
+                // See : https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
+                upgradeUuid = "B5B8365D-7442-4D9C-A451-AAFBC411E08C"
+            }
         }
     }
 }
