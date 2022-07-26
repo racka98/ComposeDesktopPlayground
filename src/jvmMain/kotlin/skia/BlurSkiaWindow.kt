@@ -41,6 +41,7 @@ fun BlurSkiaWindow(
         onCloseRequest = exit,
         state = state,
     ) {
+        //this.window.blurWindow() // Does not work right now
         Box(
             modifier = Modifier
                 .fillMaxSize(1.0f)

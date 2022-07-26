@@ -30,6 +30,10 @@ repositories {
 }
 
 kotlin {
+    mingwX64("windows") {
+        binaries { executable() }
+    }
+
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = JavaVersion.VERSION_11.majorVersion
@@ -69,9 +73,14 @@ kotlin {
                 // Logs
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("co.touchlab:kermit:$kermitVersion")
+
+                implementation("net.java.dev.jna:jna:5.12.1")
+                implementation("net.java.dev.jna:jna-platform:5.12.1")
             }
         }
         val jvmTest by getting
+
+        val windowsMain by getting
     }
 }
 
